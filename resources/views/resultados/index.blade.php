@@ -5,20 +5,20 @@
     <div class="row">
         <div class="col-md-12">
 
-            <!-- <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"> <i class="fas fa-home"></i> Home </li>
+                    <li class="breadcrumb-item"> <i class="fas fa-home"></i> <a href="{{ route('home') }}"> Home </a> </li>
+                    <li class="breadcrumb-item active" aria-current="page"> {{ __('Resultados') }} </li>
                 </ol>
-            </nav> -->
+            </nav>
 
         </div>
-
     </div>
     <div class="row justify-content-center">
 
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><i class="fas fa-home"></i> <strong> Home</strong></div>
+                <div class="card-header"><i class="far fa-check-square"></i> <strong> {{ __('Resultados') }} </strong></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -30,22 +30,22 @@
                     <div class="row">
 
                         <div class="col-sm-4">
-                            <a href="{{ route('resultados-index') }}" class="link-sem-decoracao">
-                                <div class="card border-success mb-3">
+                            <a href="#" class="link-sem-decoracao">
+                                <div class="card border-danger mb-3">
                                     <div class="card-body text-center">
-                                        <i class="far fa-check-square fa-3x icon-card-title"></i>                                        
-                                        <h2 class="card-title">Resultados</h2>
+                                        <i class="far fa-calendar-check fa-3x icon-card-title"></i>
+                                        <h2 class="card-title">Todos Resultados</h2>
                                     </div>
                                 </div>
                             </a>
                         </div>
 
                         <div class="col-sm-4">
-                            <a href="#" class="link-sem-decoracao">
-                                <div class="card border-primary mb-3">
+                            <a href="{{ route('resultados-atualizar') }}" class="link-sem-decoracao">
+                                <div class="card border-success mb-3">
                                     <div class="card-body text-center">
-                                        <i class="far fa-calendar-check fa-3x icon-card-title"></i>                                        
-                                        <h2 class="card-title">Outro</h2>
+                                        <i class="fas fa-cloud-upload-alt fa-3x icon-card-title"></i>
+                                        <h2 class="card-title">Atualizar</h2>
                                     </div>
                                 </div>
                             </a>
@@ -55,13 +55,13 @@
                             <a href="#" class="link-sem-decoracao">
                                 <div class="card border-info mb-3">
                                     <div class="card-body text-center">
-                                        <i class="far fa-list-alt fa-3x icon-card-title"></i>                                        
+                                        <i class="far fa-list-alt fa-3x icon-card-title"></i>
                                         <h2 class="card-title">Implementado</h2>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        
+
                     </div>
 
                     <div class="row">

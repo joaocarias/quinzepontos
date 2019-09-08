@@ -1,0 +1,13 @@
+.link-sem-decoracao{
+    text-decoration: none;
+    color: Black; 
+}
+
+.link-sem-decoracao:hover{
+    text-decoration: none;  
+    color: Black;    
+}
+
+.icon-card-title{
+    padding: 10px;
+}
