@@ -14,153 +14,151 @@ class ResultadoController extends Controller
         return view('resultados.index');
     }
 
+    private function removerHtml($s){
+        $pos = strpos($s, ">");
+        $domain = substr($s, $pos + 1);
+        return strstr($domain, '<', true);        
+    }
+
     public function atualizar()
     {
         $arquivo = 'resultados/d_lotfac.htm';
         $conteudoArquivo = "NULL";
         if (Storage::disk('public')->exists($arquivo)) {
             $conteudoArquivo = Storage::disk('public')->get($arquivo);
-        }
-
-       
-        $er = "/<td(.*?)?>(.*?)+<\/td>/i";
-        preg_match_all($er, $conteudoArquivo, $matches);
-
-        $ganhadores = array();
-        $ganhador = new LocalGanhador();
         
-        $meuConcurso = new Concurso();
-        $numeroGanhadores = 0;
+            $er = "/<td(.*?)?>(.*?)+<\/td>/i";
+            preg_match_all($er, $conteudoArquivo, $matches);
 
-        $i = 0;
-        while($i < 1){
-            $meuConcurso->concurso = $matches[0][$i];
+            $meuConcurso = new Concurso();
+            $ganhador = new LocalGanhador();
+            $ganhadores = array();
 
-            $i++;
-            $meuConcurso->data_sorteio = $matches[0][$i];
+            $i = 0;
+            while($i < 1){
+                $meuConcurso->concurso = $this->removerHtml($matches[0][$i]);  
+                $i++;
+                
+                $meuConcurso->data_sorteio = $this->removerHtml($matches[0][$i]);
             
-            $i++;
-            $meuConcurso->bola1 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola2 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola3 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola4 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola5 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola6 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola7 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola8 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola9 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola10 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola11 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola12 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola13 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola14 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->bola15 = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->arrecadacao_total = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->ganhadores_15_numeros = $matches[0][$i];
-
-            $i++;
-            $ganhador->cidade = $matches[0][$i];
-
-            $i++;
-            $ganhador->uf = $matches[0][$i];           
-
-            $i++;
-            $meuConcurso->ganhadores_14_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->ganhadores_13_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->ganhadores_12_numeros = $matches[0][$i];
-            
-            $i++;
-            $meuConcurso->ganhadores_11_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->valor_rateio_15_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->valor_rateio_14_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->valor_rateio_13_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->valor_rateio_12_numeros = $matches[0][$i];
-            
-            $i++;
-            $meuConcurso->valor_rateio_11_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->acumulado_15_numeros = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->estimativa_premio = $matches[0][$i];
-
-            $i++;
-            $meuConcurso->valor_acumulado_especial = $matches[0][$i];
-
-            if($meuConcurso->ganhadores_15_numeros > 0){
-                array_push($ganhadores, $ganhador);
-                $t = 1;
-                while($t < $meuConcurso->ganhadores_15_numeros){
-                    $ganhador = new LocalGanhador();
-
-                    $i++;
-                    $ganhador->cidade = $matches[0][$i];
-        
-                    $i++;
-                    $ganhador->uf = $matches[0][$i];  
-                    
+                $i++;
+                $meuConcurso->bola1 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola2 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola3 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola4 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola5 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola6 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola7 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola8 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola9 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola10 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola11 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola12 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola13 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola14 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->bola15 = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->arrecadacao_total = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->ganhadores_15_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $ganhador->cidade = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $ganhador->uf = $this->removerHtml($matches[0][$i]);           
+    
+                $i++;
+                $meuConcurso->ganhadores_14_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->ganhadores_13_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->ganhadores_12_numeros = $this->removerHtml($matches[0][$i]);
+                
+                $i++;
+                $meuConcurso->ganhadores_11_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->valor_rateio_15_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->valor_rateio_14_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->valor_rateio_13_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->valor_rateio_12_numeros = $this->removerHtml($matches[0][$i]);
+                
+                $i++;
+                $meuConcurso->valor_rateio_11_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->acumulado_15_numeros = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->estimativa_premio = $this->removerHtml($matches[0][$i]);
+    
+                $i++;
+                $meuConcurso->valor_acumulado_especial = $this->removerHtml($matches[0][$i]);
+                  
+                if ( $meuConcurso->ganhadores_15_numeros > 0){
                     array_push($ganhadores, $ganhador);
-                    $t++;
-                }
-                echo "asdf";
-               
-            }
-            print_r($meuConcurso->ganhadores_15_numeros);
-            
+                    $t = 1;
+                    while($t < $meuConcurso->ganhadores_15_numeros){
+                        $ganhador = new LocalGanhador();
 
+                        $i++;
+                        $ganhador->cidade = $matches[0][$i];
+            
+                        $i++;
+                        $ganhador->uf = $matches[0][$i];  
+                        
+                        array_push($ganhadores, $ganhador);
+                        $t++;
+                    }
+                }
+            }
         }
 
-        echo "<pre>";
-        print_r($meuConcurso->ganhadores_15_numeros);
-        //print_r($ganhadores);
-      //  print_r($matches);
+        echo "<pre>";            
+        var_dump($ganhadores);               
         echo "</pre>";
-
+       
+       
+       
         //  return view('resultados.atualizar');
     }
 
