@@ -6,6 +6,7 @@ use App\Concurso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\LocalGanhador;
+use App\MyLibs\Auxiliar;
 
 class ResultadoController extends Controller
 {
@@ -39,7 +40,7 @@ class ResultadoController extends Controller
                 $meuConcurso->concurso = $this->removerHtml($matches[0][$i]);  
                 $i++;
                 
-                $meuConcurso->data_sorteio = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->data_sorteio = Auxiliar::converterDataParaUSA($this->removerHtml($matches[0][$i]));
             
                 $i++;
                 $meuConcurso->bola1 = $this->removerHtml($matches[0][$i]);
@@ -87,7 +88,7 @@ class ResultadoController extends Controller
                 $meuConcurso->bola15 = $this->removerHtml($matches[0][$i]);
     
                 $i++;
-                $meuConcurso->arrecadacao_total = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->arrecadacao_total = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
                 $meuConcurso->ganhadores_15_numeros = $this->removerHtml($matches[0][$i]);
@@ -111,28 +112,28 @@ class ResultadoController extends Controller
                 $meuConcurso->ganhadores_11_numeros = $this->removerHtml($matches[0][$i]);
     
                 $i++;
-                $meuConcurso->valor_rateio_15_numeros = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->valor_rateio_15_numeros = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
-                $meuConcurso->valor_rateio_14_numeros = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->valor_rateio_14_numeros = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
-                $meuConcurso->valor_rateio_13_numeros = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->valor_rateio_13_numeros = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
-                $meuConcurso->valor_rateio_12_numeros = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->valor_rateio_12_numeros = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
                 
                 $i++;
-                $meuConcurso->valor_rateio_11_numeros = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->valor_rateio_11_numeros = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
-                $meuConcurso->acumulado_15_numeros = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->acumulado_15_numeros = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
-                $meuConcurso->estimativa_premio = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->estimativa_premio = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
     
                 $i++;
-                $meuConcurso->valor_acumulado_especial = $this->removerHtml($matches[0][$i]);
+                $meuConcurso->valor_acumulado_especial = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
                   
                 if ( $meuConcurso->ganhadores_15_numeros > 0){
                     array_push($ganhadores, $ganhador);
@@ -150,11 +151,13 @@ class ResultadoController extends Controller
                         $t++;
                     }
                 }
+
+                $meuConcurso->save();
             }
         }
 
         echo "<pre>";            
-        var_dump($ganhadores);               
+        var_dump(count($matches[0]));               
         echo "</pre>";
        
        
