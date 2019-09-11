@@ -30,16 +30,19 @@ class ResultadoController extends Controller
         
             $er = "/<td(.*?)?>(.*?)+<\/td>/i";
             preg_match_all($er, $conteudoArquivo, $matches);
-
-            $meuConcurso = new Concurso();
-            $ganhador = new LocalGanhador();
-            $ganhadores = array();
-
+           
+            $quantidadeDeDados = count($matches[0]);
             $i = 0;
-            while($i < 1){
+            
+            while($i < $quantidadeDeDados){
+                $meuConcurso = new Concurso();
+                $ganhador = new LocalGanhador();
+                $ganhadores = array();
+    
                 $meuConcurso->concurso = $this->removerHtml($matches[0][$i]);  
-                $i++;
+                echo "concurso: " . $meuConcurso->concurso . " - i: {$i}  <br /> ";
                 
+                $i++;                
                 $meuConcurso->data_sorteio = Auxiliar::converterDataParaUSA($this->removerHtml($matches[0][$i]));
             
                 $i++;
@@ -135,6 +138,14 @@ class ResultadoController extends Controller
                 $i++;
                 $meuConcurso->valor_acumulado_especial = str_replace(',','.', str_replace('.','', $this->removerHtml($matches[0][$i])));
                   
+                $query = Concurso::where('concurso', $meuConcurso->concurso)->get();                        
+                if(count($query) == 0){
+                    echo "Salvar concurso...<br />";
+                    $meuConcurso->save();                    
+                }else{
+                    echo "concurso já salvo...<br />";
+                }
+
                 if ( $meuConcurso->ganhadores_15_numeros > 0){
                     array_push($ganhadores, $ganhador);
                     $t = 1;
@@ -148,17 +159,18 @@ class ResultadoController extends Controller
                         $ganhador->uf = $matches[0][$i];  
                         
                         array_push($ganhadores, $ganhador);
-                        $t++;
+                        
+                        $t++;                        
                     }
                 }
 
-                $meuConcurso->save();
+                $i++;
             }
         }
 
-        echo "<pre>";            
-        var_dump(count($matches[0]));               
-        echo "</pre>";
+        // echo "<pre>";            
+        // var_dump($matches[0]);               
+        // echo "</pre>";
        
        
        
