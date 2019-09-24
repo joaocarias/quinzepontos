@@ -22,7 +22,7 @@
 
                 <div class="card-body">
 
-                    @if($msg == 200)
+                    @if(isset($msg) and $msg == 200)
                     <div class="row">
                     <div class="col col-12">
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -38,7 +38,7 @@
                     <div class="row">
 
                         <div class="col-sm-6">
-                            <a href="#" class="link-sem-decoracao">
+                            <a href="{{ route('resultados-todos') }}" class="link-sem-decoracao">
                                 <div class="card border-danger mb-3">
                                     <div class="card-body text-center">
                                         <i class="far fa-calendar-check fa-3x icon-card-title"></i>

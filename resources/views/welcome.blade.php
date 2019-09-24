@@ -89,6 +89,7 @@
                 <div class="links">
                     <a href="http://loterias.caixa.gov.br/wps/portal/loterias/landing/lotofacil/" target="_blank">Lotofácil</a>
                     <a href="https://www.loteriasonline.caixa.gov.br/silce-web/#/termos-de-uso" target="_blank">Loteria Online da Caixa</a>
+                    <a href="https://laravel-news.com">Blog</a>    
                     <a href="https://laravel-news.com">Contato</a>                    
                     <a href="https://nova.laravel.com">Sobre</a>
                     <a href="https://forge.laravel.com">Política de Privacidade</a>

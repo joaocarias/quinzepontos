@@ -22,6 +22,11 @@ class ResultadoController extends Controller
         return strstr($domain, '<', true);        
     }
 
+    public function todos(){
+        $resultados = Concurso::orderBy('id', 'desc')->get();
+        return view('resultados.todos' , ['resultados' => $resultados]);
+    }
+
     public function atualizar()
     {
         try{
