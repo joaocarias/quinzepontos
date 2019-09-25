@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
 
@@ -30,6 +30,22 @@
                                     <div class="row text-center">
                                         <div class="col col-12">
                                             <a href="{{ route('simulador-fechamentos') }}" type="button" class="btn btn-success">Simular Fechamentos</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card border-success mb-3">
+                                <div class="card-body text-justify">
+                                    <h3 class="card-title">Todos os Concursos</h3>
+                                    <p>Simula uma aposta com todos concursos. </p>
+                                    <div class="row text-center">
+                                        <div class="col col-12">
+                                            <a href="{{ route('simulador-todos-concursos') }}" type="button" class="btn btn-success">Simular Todos os Concursos</a>
                                         </div>
                                     </div>
                                 </div>

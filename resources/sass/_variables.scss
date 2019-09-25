@@ -2,7 +2,19 @@
 $body-bg: #ffffff;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif:
+  // Safari para OS X e iOS (San Francisco)
+  -apple-system,
+  // Chrome < 56 para OS X (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Segoe UI",
+  // Android
+  "Roboto",
+  // Fallback de fonts web básicas
+  "Helvetica Neue", Arial, sans-serif,
+  // Fonts de Emoji
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 

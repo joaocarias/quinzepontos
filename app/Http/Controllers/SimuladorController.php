@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Concurso;
 use App\Http\ViewModels\FechamentosViewModel;
+use App\Http\ViewModels\MetodoMartingaleViewModel;
+use App\Http\ViewModels\Simulador\TodosConcursosViewModel;
 use Illuminate\Http\Request;
 
 class SimuladorController extends Controller
@@ -28,9 +31,49 @@ class SimuladorController extends Controller
         return view('simuladores.index');
     }
 
+    public function todosConcursos(){
+        $model = new TodosConcursosViewModel();
+       
+        $aposta = [
+            5, 	13, 	6, 	17, 	3, 	4, 	15, 	7 ,	8, 	12, 	16, 	9, 	18, 	2, 	25];
+        
+        $model->setAposta($aposta);
+       
+        $concursos = [];
+        $pontos = [];
+        $gastos = [];
+        
+        $concursos = Concurso::all();           
+        $model->setConcursos($concursos);
+       
+        foreach($concursos as $concurso){
+            $pontuacao = $this->ocorrencia(
+                array($concurso->bola1, $concurso->bola2, $concurso->bola3, $concurso->bola4, $concurso->bola5,
+                        $concurso->bola6, $concurso->bola7, $concurso->bola8, $concurso->bola9, $concurso->bola10,
+                        $concurso->bola11, $concurso->bola12, $concurso->bola13, $concurso->bola14, $concurso->bola15, )
+                , $aposta);
+            array_push($pontos, $pontuacao);           
+
+            $gasto = $concurso->valor_rateio_11_numeros / 2;
+            array_push($gastos, $gasto);
+        }
+       
+        $model->setPontos($pontos);
+        $model->setGastos($gastos);
+        
+        return view('simuladores.todosconcursos', ['model' => $model] );
+    }
+
     public function metodoMartingale()
     {
+        $model = new MetodoMartingaleViewModel();
+
         $arrayBilhete = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        $model->setAposta($arrayBilhete);
+
+        $concursoInicio = 500;
+
+        $pontos = 0;
 
         return view('simuladores.martingale', ['arrayBilhete' => $arrayBilhete]);
     }
@@ -39,8 +82,18 @@ class SimuladorController extends Controller
     {        
         $model = new FechamentosViewModel();
 
-        $array = [ 6, 15, 20, 23];
+        $concursoReferencia = 500;
+        $concursos = Concurso::where('concurso','<',$concursoReferencia)->orderBy('id', 'desc')->take(10)->get();
+        $model->setConcursos($concursos);
+
+        $concursoAtual = Concurso::where('concurso',$concursoReferencia)->get();
+        $model->setConcursoAtual($concursoAtual);
+
+        $array = [ 3, 4, 9, 10, 11, 17, 19, 20, 23, 25 ];
         $model->setIgnorados($array);
+
+
+
 
     //     $numeroDeApostas = 15;
     //     $apostas = array();

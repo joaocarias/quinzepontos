@@ -8,7 +8,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"> <i class="fas fa-home"></i> <a href="{{ route('home') }}"> Home </a> </li>
-                    <li class="breadcrumb-item active" aria-current="page"> <a href="{{ route('simuladores-index') }}"> {{ __('Simuladores') }} </a> </li>
+                    <li class="breadcrumb-item"> <a href="{{ route('simuladores-index') }}"> {{ __('Simuladores') }} </a> </li>
                     <li class="breadcrumb-item active" aria-current="page"> {{ __('Método Martingale') }} </li>
                 </ol>
             </nav>

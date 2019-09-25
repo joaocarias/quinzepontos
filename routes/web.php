@@ -16,5 +16,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('simuladores', 'SimuladorController@index' )->name('simuladores-index');
     Route::get('metodosmartigale', 'SimuladorController@metodoMartingale')->name('simulador-metodo-martingale');
     Route::get('fechamentos', 'SimuladorController@fechamentos')->name('simulador-fechamentos');
+    Route::get('todosconcursos', 'SimuladorController@todosConcursos')->name('simulador-todos-concursos');
     
 });
