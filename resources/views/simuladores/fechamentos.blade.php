@@ -26,7 +26,7 @@
                         <div class="col-md-12">
                             <div class="card border-success mb-3">
                                 <div class="card-body text-center">
-                                <table class="table table-sm">
+                                    <table class="table table-sm">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Concurso</th>
@@ -115,93 +115,152 @@
                                         </thead>
                                         <tbody>
                                             @foreach($model->getConcursos() as $r)
-                                                
-                                                <?php
-                                                    $array = [
-                                                        $r->bola1, $r->bola2, $r->bola3, $r->bola4, $r->bola5
-                                                        , $r->bola6, $r->bola7, $r->bola8, $r->bola9, $r->bola10
-                                                        , $r->bola11, $r->bola12, $r->bola13, $r->bola14, $r->bola15
-                                                        ];
-                                                 ?>
+
+                                            <?php
+                                            $array = [
+                                                $r->bola1, $r->bola2, $r->bola3, $r->bola4, $r->bola5, $r->bola6, $r->bola7, $r->bola8, $r->bola9, $r->bola10, $r->bola11, $r->bola12, $r->bola13, $r->bola14, $r->bola15
+                                            ];
+                                            ?>
                                             <tr>
                                                 <th scope="row">{{ $r->concurso }}</th>
                                                 <td>{{ $r->data_sorteio }}</td>
                                                 <td>@if( in_array(1, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(2, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(3, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(4, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(5, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(6, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(7, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(8, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(9, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(10, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(11, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(12, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(13, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(14, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(15, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(16, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(17, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
-                                                    <td>@if( in_array(18, $array) )
-                                                        {{ __('X') }} 
+                                                <td>@if( in_array(18, $array) )
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(19, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(20, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(21, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(22, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
-                                                    <td>@if( in_array(23, $array) )
-                                                        {{ __('X') }} 
+                                                <td>@if( in_array(23, $array) )
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(24, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                                 <td>@if( in_array(25, $array) )
-                                                        {{ __('X') }} 
+                                                    {{ __('X') }}
                                                     @endif</td>
                                             </tr>
+                                            @endforeach
+
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <?php
+                                                $p = 1;
+                                                $contOcorrenciaBola = $model->getContOcorrencia();
+                                                while ($p <= 25) {
+                                                    ?>
+
+                                                    <td>{{ $contOcorrenciaBola[$p] }}</td>
+
+                                                <?php
+                                                    $p++;
+                                                }
+                                                ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h3>Apostas</h3>
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">1</th>
+                                                <th scope="col">2</th>
+                                                <th scope="col">3</th>
+                                                <th scope="col">4</th>
+                                                <th scope="col">5</th>
+                                                <th scope="col">6</th>
+                                                <th scope="col">7</th>
+                                                <th scope="col">8</th>
+                                                <th scope="col">9</th>
+                                                <th scope="col">10</th>
+                                                <th scope="col">11</th>
+                                                <th scope="col">12</th>
+                                                <th scope="col">13</th>
+                                                <th scope="col">14</th>
+                                                <th scope="col">15</th>
+                                                <th scope="col">Pontos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $nAposta = 1;
+                                            $pontos = $model->getPontos();
+                                            ?>
+                                            @foreach($model->getApostas() as $aposta)
+
+                                            <tr>
+                                                <td>{{ $nAposta }}</td>
+                                                @foreach($aposta as $item)
+                                                <td>{{ $item }}</td>
+                                                @endforeach
+                                                <td>{{ $pontos[$nAposta-1] }}</td>
+                                            </tr>
+                                            <?php
+                                            $nAposta++;
+                                            ?>
                                             @endforeach
                                         </tbody>
                                     </table>
