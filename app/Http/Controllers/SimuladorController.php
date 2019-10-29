@@ -84,7 +84,7 @@ class SimuladorController extends Controller
         arsort($contOcorrenciaBolas);
         $i = 0;
         $ignorados = [];
-        while (current($contOcorrenciaBolas) && $i < 4) {
+        while (current($contOcorrenciaBolas) && $i < 6) {
             array_push($ignorados, key($contOcorrenciaBolas));
             $i++;
             next($contOcorrenciaBolas);
@@ -92,9 +92,11 @@ class SimuladorController extends Controller
         $model->setIgnorados($ignorados);
 
         $apostas = [];
-        $n_apostas = 100;
+        $n_apostas = 15;
         $i = 0;
         $pontos = [];
+        $gastos = [];
+        $ganhos = [];
         while ($i < $n_apostas) {
             $aposta = $this->gerarAposta($ignorados);
             sort($aposta);
@@ -106,11 +108,31 @@ class SimuladorController extends Controller
                 $concurso[0]->bola6, $concurso[0]->bola7, $concurso[0]->bola8, $concurso[0]->bola9, $concurso[0]->bola10,
                 $concurso[0]->bola11, $concurso[0]->bola12, $concurso[0]->bola13, $concurso[0]->bola14, $concurso[0]->bola15,
             ), $aposta);
+            
             array_push($pontos, $ponto);
+
+            $ganho = 0;
+            if($ponto == 11){
+                $ganho = $concurso[0]->valor_rateio_11_numeros;
+            }else if($ponto == 12){
+                $ganho = $concurso[0]->valor_rateio_12_numeros;
+            }else if($ponto == 13){
+                $ganho = $concurso[0]->valor_rateio_13_numeros;
+            }else if($ponto == 14){
+                $ganho = $concurso[0]->valor_rateio_14_numeros;
+            }else if($ponto == 15){
+                $ganho = $concurso[0]->valor_rateio_15_numeros;
+            }
+            array_push($ganhos, $ganho);
+
+            array_push($gastos, $concurso[0]->valor_rateio_11_numeros / 2);
         }
 
         $model->setApostas($apostas);
         $model->setPontos($pontos);
+        $model->setNApostas($n_apostas);
+        $model->setGastos($gastos);
+        $model->setGanhos($ganhos);
 
        return view('simuladores.fechamentos', ['model' => $model]);
     }

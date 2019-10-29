@@ -11,6 +11,8 @@ class FechamentosViewModel
     private $apostas = [];
     private $pontos = [];
     private $gastos = [];
+    private $nApostas = 0;
+    private $ganhos = [];
     
     function __construct()
     {
@@ -21,14 +23,31 @@ class FechamentosViewModel
         $this->apostas = [];
         $this->pontos = [];
         $this->gastos = [];
+        $this->nApostas = 0;
     }
     
     public function getPontos(){
         return $this->pontos;
+    }
+    
+    public function getGanhos(){
+        return $this->ganhos;
+    }
+
+    public function getNApostas(){
+        return $this->nApostas;
     }    
 
     public function setPontos($pontos){
         $this->pontos = $pontos;
+    }
+
+    public function setGanhos($ganhos){
+        $this->ganhos = $ganhos;
+    }
+
+    public function setNApostas($nApostas){
+        $this->nApostas = $nApostas;
     }
     
     public function getGastos(){

@@ -199,6 +199,7 @@
                                                 <td>@if( in_array(25, $array) )
                                                     {{ __('X') }}
                                                     @endif</td>
+
                                             </tr>
                                             @endforeach
 
@@ -242,21 +243,45 @@
                                                 <th scope="col">14</th>
                                                 <th scope="col">15</th>
                                                 <th scope="col">Pontos</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col">Ganhos</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $nAposta = 1;
                                             $pontos = $model->getPontos();
+                                            $gastos = $model->getGastos();
+                                            $ganhos = $model->getGanhos();
                                             ?>
                                             @foreach($model->getApostas() as $aposta)
 
-                                            <tr>
+                                            <?php
+
+                                            $classTR = "";
+                                            $ponto = $pontos[$nAposta-1];
+                                            
+                                            if ($ponto == 11) {
+                                                $classTR = 'class="table-active"';
+                                            } else if ($ponto == 12) {
+                                                $classTR = 'class="table-danger"';
+                                            } else if ($ponto == 13) {
+                                                $classTR = 'class="table-warning"';
+                                            } else if ($ponto == 14) {
+                                                $classTR = 'class="table-info"';
+                                            } else if ($ponto == 15) {
+                                                $classTR = 'class="table-success"';
+                                            }
+                                            ?>
+
+                                            <tr <?php echo $classTR; ?>>
                                                 <td>{{ $nAposta }}</td>
                                                 @foreach($aposta as $item)
                                                 <td>{{ $item }}</td>
                                                 @endforeach
                                                 <td>{{ $pontos[$nAposta-1] }}</td>
+                                                <td>{{ $gastos[$nAposta-1] }}</td>
+                                                <td>{{ $ganhos[$nAposta-1] }}</td>
                                             </tr>
                                             <?php
                                             $nAposta++;
@@ -264,6 +289,27 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Apostas</th>
+                                                <th scope="col">Gastos</th>
+                                                <th scope="col">Ganhos</th>
+                                                <th scope="col">Saldo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ $model->getNApostas() }}</td>
+                                                <td>{{ array_sum($model->getGastos()) }}</td>
+                                                <td>{{ array_sum($model->getGanhos()) }}</td>
+                                                <td>{{ array_sum($model->getGanhos()) - array_sum($model->getGastos()) }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
                                 </div>
                             </div>
                         </div>
